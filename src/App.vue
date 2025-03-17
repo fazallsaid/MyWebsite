@@ -1,28 +1,47 @@
 <script setup>
-import NoApiKeyView from "@/views/NoApiKeyView.vue";
-import Layout from "@/containers/Layout.vue";
-import { useApiError, useMenuItems } from "@/utils/hooks";
-import ApiTokenNotFound from "@/components/ApiTokenNotFound.vue";
-import Spinner from "@/components/Spinner.vue";
-
-const apiKeyExists = !!import.meta.env.VITE_APP_BUTTER_CMS_API_KEY;
-
-const { items, loading } = useMenuItems();
-const { error } = useApiError();
+import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <spinner v-if="loading"/>
-  <no-api-key-view v-else-if="!apiKeyExists" />
-  <api-token-not-found v-else-if="error" />
-  <Layout :menu-items="items" v-else>
-    <RouterView />
-  </Layout>
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
 </template>
 
-<style>
-@import "@/assets/css/bootstrap.min.css";
-@import "@/assets/css/main.css";
-@import "@/assets/css/lineicons.css";
-@import "@/assets/css/tiny-slider.css";
+<style scoped>
+header {
+  line-height: 1.5;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
 </style>
